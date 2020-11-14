@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container w-75 my-5">
+        
+            <h1 class="text-center">{{ post['title'] }}</h1>
+            <p class="my-3">
+                 {{ post.author }}, {{ post.date.strftime('%d.%m.%Y') }}
+            </p>
+            <div class="text-center d-flex my-1">
+                 <img src="{{ url_for('static', filename='images/' ~ post.image_filename) }}" class="photo" alt="Card image cap">
+            </div>
+            <p class="text-justify d-flex align-items-center my-5">
+                {{ post.text }}
+             </p>
+
+             <form>
+              <div class="card">
+              <div class="form-group">
+                <div class="alert alert-dark" role="alert">
+                  Оставьте комментарий
+                </div>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <button type="button" class="btn btn-dark mt-3 m-3">Отправить</button>
+              </div>
+            </div>
+            </form>
+            {% for comment in post.comments %}
+            <div class="media mt-4">
+              <img class="mr-3 ava" src="{{ url_for('static', filename='images/' ~ comment.avatar) }}" alt="Generic placeholder image">
+              <div class="media-body">
+                <h5 class="mt-0">{{ comment.author }}</h5>
+                {{ comment.text }}
+                    {% endfor %}
+                  </div>
+                </div>
+    </div>
+{% endblock %}
