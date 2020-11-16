@@ -30,6 +30,7 @@ def generate_comments(replies=True):
         comments.append(comment)
         if replies:
             comment['replies'] = generate_comments(replies=False)
+            
     return comments
 
 def generate_post(i):

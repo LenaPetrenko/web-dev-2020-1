@@ -26,13 +26,26 @@
             </div>
             </form>
             {% for comment in post.comments %}
-            <div class="media mt-4">
-              <img class="mr-3 ava" src="{{ url_for('static', filename='images/' ~ comment.avatar) }}" alt="Generic placeholder image">
-              <div class="media-body">
-                <h5 class="mt-0">{{ comment.author }}</h5>
-                {{ comment.text }}
-                    {% endfor %}
-                  </div>
-                </div>
-    </div>
+              </div>
+              <div class="container mt-5">
+                <div class="media ">
+                   <img class="mr-3 ava" src="{{ url_for('static', filename='images/' ~ comment.avatar) }}" alt="Generic placeholder image">
+                    <div class="media-body">
+                       <h5 class="mt-0">{{ comment.author }}</h5>
+                        {{ comment.text }}
+                        {% for reply in comment.replies %}
+                         <div class="media mt-3">
+                            <a class="pr-3" href="#">
+                               <img class="ava" src="{{ url_for('static', filename='images/' ~ reply.avatar) }}" alt="Generic placeholder image">
+                           </a>
+                               <div class="media-body">
+                                 <h5 class="mt-0">{{ reply.author }}</h5>
+                                  {{ reply.text}} 
+                               </div>
+                          </div>
+                          {% endfor %}
+                      </div>
+                    </div>
+                      {% endfor %}
+                  </div> 
 {% endblock %}
